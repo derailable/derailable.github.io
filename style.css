@@ -1,0 +1,336 @@
+:root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, "SFMono-Regular", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  --clr-bg: #080807;
+  --clr-bg-elevated: #11100e;
+  --clr-panel: rgb(255 255 255 / 0.026);
+  --clr-panel-border: rgb(221 210 188 / 0.2);
+  --clr-fg: #fff8ed;
+  --clr-muted: #b8ad9b;
+  --clr-muted-strong: #e0d6c6;
+  --clr-signal-rgb: 245 92 55;
+  --clr-amber-rgb: 245 174 66;
+  --clr-link: #ffba74;
+  --clr-focus: #ff7a45;
+
+  --content-w: 42rem;
+  --copy-w: 40rem;
+  --hero-w: 35rem;
+
+  color-scheme: dark;
+  accent-color: var(--clr-focus);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--clr-bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  background: linear-gradient(180deg, var(--clr-bg-elevated) 0%, var(--clr-bg) 100%);
+  color: var(--clr-fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-wrap: pretty;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 3;
+  padding: 0.7rem 0.95rem;
+  border-radius: 0.5rem;
+  background: var(--clr-fg);
+  color: var(--clr-bg);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-180%);
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38rem 24rem at 12% 10%, rgb(var(--clr-signal-rgb) / 0.052), transparent 72%),
+    radial-gradient(34rem 18rem at 88% 12%, rgb(var(--clr-amber-rgb) / 0.036), transparent 70%);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2.25rem, 4vw, 3.4rem);
+  width: min(calc(100% - 2rem), var(--content-w));
+  margin-inline: auto;
+  padding: clamp(3rem, 7vw, 5.5rem) 0 3.5rem;
+  justify-items: center;
+}
+
+main > * {
+  width: 100%;
+}
+
+.hero {
+  display: grid;
+  width: min(100%, var(--hero-w));
+  justify-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.eyebrow,
+.connect-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+}
+
+.logo-mark {
+  width: min(100%, clamp(11.5rem, 28vw, 18rem));
+  filter: drop-shadow(0 1.1rem 2.2rem rgb(0 0 0 / 0.28));
+}
+
+.name {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 0.08em;
+  color: var(--clr-fg);
+  font-size: 3.75rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .name {
+    background-image: linear-gradient(
+      90deg,
+      rgb(255 248 237) 0%,
+      rgb(255 248 237) 56%,
+      rgb(var(--clr-amber-rgb) / 0.88) 78%,
+      rgb(var(--clr-signal-rgb) / 0.78) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.tagline {
+  max-width: 33rem;
+  margin: 0;
+  color: var(--clr-muted-strong);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.32;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.tagline::after {
+  content: "";
+  display: block;
+  width: clamp(4.5rem, 16vw, 6.5rem);
+  height: 1px;
+  margin: 1.1rem auto 0;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--clr-signal-rgb) / 0.68),
+    rgb(var(--clr-amber-rgb) / 0.5)
+  );
+}
+
+.intro,
+.contact {
+  width: min(100%, var(--copy-w));
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--clr-panel-border);
+}
+
+.intro {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.section-title {
+  margin: 0;
+  color: var(--clr-fg);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.intro p {
+  margin: 0;
+  color: var(--clr-muted-strong);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--clr-link);
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--clr-amber-rgb) / 0.36);
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.2em;
+  transition:
+    color 180ms ease,
+    text-decoration-color 180ms ease;
+}
+
+a:hover {
+  color: var(--clr-fg);
+  text-decoration-color: currentColor;
+}
+
+:where(a, button):focus-visible {
+  border-radius: 0.3rem;
+  outline: 2px solid var(--clr-focus);
+  outline-offset: 0.2rem;
+}
+
+.contact {
+  color: var(--clr-muted);
+}
+
+.contact nav {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.project-credit {
+  margin: 0.65rem 0 0;
+  color: var(--clr-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-block: 0.35rem;
+  color: var(--clr-link);
+  font-weight: 600;
+}
+
+.contact-list a:hover {
+  color: var(--clr-fg);
+}
+
+::selection {
+  background: rgb(var(--clr-signal-rgb) / 0.28);
+  color: var(--clr-fg);
+}
+
+@media (max-width: 40rem) {
+  main {
+    width: calc(100% - 1.5rem);
+    padding-top: 2.75rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero {
+    gap: 0.8rem;
+  }
+
+  .name {
+    font-size: 2.55rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .hero-bg {
+    display: none;
+  }
+
+  body {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .skip-link {
+    background: CanvasText;
+    color: Canvas;
+  }
+
+  .intro,
+  .contact {
+    border-color: CanvasText;
+  }
+
+  a {
+    color: LinkText;
+    text-decoration-color: currentColor;
+  }
+
+  .name {
+    background: none;
+    color: CanvasText;
+  }
+
+  .tagline::after {
+    background: CanvasText;
+  }
+
+  :where(a, button):focus-visible {
+    outline-color: Highlight;
+  }
+}
