@@ -223,7 +223,7 @@ function renderHome() {
       <div class="hero-copy">
         <p class="kicker">A father-daughter history podcast</p>
         <h1>${escapeHtml(config.tagline)}</h1>
-        <p class="hero-intro">Hazel picks something from history she&rsquo;s curious about. Her dad, Caleb, does the research and tells her one fascinating true story for the first time, on mic.</p>
+        <p class="hero-intro">Hazel picks something from history she&rsquo;s curious about. Her dad, Caleb, does the research and tells her one fascinating true story for the first time.</p>
         ${listenLinks({ includeRss: true, label: "Listen and subscribe", id: "listen" })}
       </div>
     </div>
@@ -334,14 +334,14 @@ function renderHomeMarkdown() {
 
 ${config.description}
 
-Every episode, Hazel chooses a historical topic she is curious about. Caleb researches it and tells her one fascinating true story for the first time during recording. Her questions and reactions are unscripted.
+Hazel picks something from history she is curious about. Her dad, Caleb, does the research and tells her one fascinating true story for the first time. Her questions and reactions are unscripted.
 
 ## Listen
 
 - [Apple Podcasts](${config.appleUrl})
 - [Spotify](${config.spotifyUrl})
 - [Overcast](${config.overcastUrl})
-- [Podcast RSS](${config.rssUrl}): The authoritative podcast feed.
+- [Podcast RSS](${config.rssUrl}): The official podcast feed.
 
 ## Episodes
 
@@ -382,12 +382,12 @@ function renderLlmsTxt() {
 
 > ${config.tagline}
 
-${config.description} Episode pages contain editorial summaries, independently sourced historical discoveries, further reading, and optional transcripts.
+${config.description} Episode pages include summaries, show notes, historical sources, further reading, and optional transcripts.
 
 ## Site
 
 - [Derailable overview and episode archive](${absoluteUrl("/index.md")}): Show description, listening links, and all published episodes.
-- [Podcast RSS](${config.rssUrl}): The authoritative feed for podcast metadata and audio distribution.
+- [Podcast RSS](${config.rssUrl}): The official feed for episodes and podcast metadata.
 ${episodeList}
 
 ## Listen
