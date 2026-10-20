@@ -72,6 +72,7 @@ export function parseEpisode(source, file) {
   }
 
   const sections = [];
+  const preamble = [];
   let current;
   for (const line of match[2].split(/\r?\n/)) {
     const heading = line.match(/^##\s+(.+?)\s*$/);
@@ -80,8 +81,17 @@ export function parseEpisode(source, file) {
       sections.push(current);
     } else if (current) {
       current.content.push(line);
+    } else {
+      preamble.push(line);
     }
   }
+
+  const meaningfulPreamble = preamble
+    .join("\n")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .trim();
+  if (meaningfulPreamble)
+    throw new Error(`${file}: content before the first level-two section heading is not supported`);
 
   const filenameSlug = path.basename(file, path.extname(file)).replace(/^\d+-/, "");
   return {
