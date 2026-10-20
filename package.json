@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "vp check && npm run build && html-validate 'dist/**/*.html' && node scripts/check.mjs",
+    "check": "vp check && vp test && npm run build && html-validate 'dist/**/*.html' && node scripts/check.mjs",
     "dev": "npm run build && vp preview",
     "preview": "vp preview",
     "prepare": "vp config",
@@ -15,10 +15,11 @@
   "devDependencies": {
     "html-validate": "11.17.0",
     "marked": "18.1.1",
-    "vite-plus": "0.3.0"
+    "vite-plus": "^0.3.3",
+    "yaml": "^2.9.1"
   },
   "overrides": {
-    "vite": "npm:@voidzero-dev/vite-plus-core@0.3.0"
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.3.3"
   },
   "devEngines": {
     "packageManager": {
