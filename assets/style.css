@@ -580,13 +580,34 @@ a {
   .hero h1 {
     font-size: clamp(3.1rem, 15vw, 4.4rem);
   }
+  .hero {
+    gap: 2.25rem;
+    padding-block: 3rem;
+  }
+  .episode-hero {
+    padding-block: 3rem;
+  }
+  .back-link {
+    margin-bottom: 2.75rem;
+  }
+  .episode-hero h1 {
+    font-size: clamp(2.65rem, 13vw, 3rem);
+  }
   .listen-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
   }
   .button {
-    flex: 1 1 9rem;
+    width: 100%;
+    min-width: 0;
+    padding-inline: 0.65rem;
+  }
+  .listen-links .button:first-child {
+    grid-column: 1 / -1;
   }
   .listen-links .text-link {
+    grid-column: 1 / -1;
     width: 100%;
     margin: 0.45rem 0 0;
   }
