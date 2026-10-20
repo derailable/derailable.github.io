@@ -1,6 +1,6 @@
 ---
 # Derailable episode template.
-# Fill in the required metadata before adding this file to the episode directory.
+# Fill in the required metadata when copying this file into the episode directory.
 # Keep draft: true until ready to publish.
 # Required: title, episode, published, description, and draft.
 title: ""
