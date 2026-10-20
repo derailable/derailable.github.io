@@ -1,11 +1,47 @@
 # Derailable
 
-The static website for [derailable.com](https://derailable.com), a father-daughter history podcast
-hosted by Caleb and Hazel.
+<p align="center">
+  <a href="https://derailable.com/">
+    <img src="assets/brand/logo-lockup-on-dark.png" width="640" alt="Derailable">
+  </a>
+</p>
 
-The site uses a small Node build script to turn one Markdown file per episode into plain HTML for
-GitHub Pages. There is no frontend framework, client-side JavaScript, CMS, database, or application
-runtime. No package dependencies are delivered to visitors.
+<p align="center"><strong>Strange and surprising stories from history.</strong></p>
+
+<p align="center">
+  <a href="https://derailable.com/">Website</a> ·
+  <a href="https://podcasts.apple.com/us/podcast/derailable/id6824321418">Apple Podcasts</a> ·
+  <a href="https://open.spotify.com/show/7izZqcaoe69vQOLcqvisAp">Spotify</a> ·
+  <a href="https://overcast.fm/itunes6824321418/derailable">Overcast</a> ·
+  <a href="https://anchor.fm/s/118a88194/podcast/rss">RSS</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/derailable/derailable.github.io/actions/workflows/deploy.yml">
+    <img src="https://github.com/derailable/derailable.github.io/actions/workflows/deploy.yml/badge.svg" alt="Deploy site status">
+  </a>
+</p>
+
+## About the podcast
+
+**Derailable** is a history podcast hosted by Caleb and his daughter Hazel. Hazel chooses something
+from history she wants to understand, Caleb researches it, and then he tells her the story while
+they record. Hazel hears the details for the first time, so her questions, reactions, and
+discoveries are genuine and unscripted.
+
+The show explores the strange, surprising, forgotten, and sometimes unbelievable turns hidden in
+real history. It is made for curious adults and children, with thoughtful storytelling, reliable
+sources, and enough room for the conversation to take an unexpected detour.
+
+Derailable is produced by **Mudhop Studios**. Visit [derailable.com](https://derailable.com/) to
+browse episodes, read show notes, and explore the historical sources behind each story.
+
+## About this repository
+
+This repository contains the podcast's canonical website. A small Node build script turns one
+Markdown file per episode into plain HTML for GitHub Pages. There is no frontend framework,
+client-side JavaScript, CMS, database, or application runtime. No package dependencies are delivered
+to visitors.
 
 ## Project structure
 
