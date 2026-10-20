@@ -154,12 +154,17 @@ Edit `site.config.json` to change:
 
 - Site name, tagline, and description
 - Canonical site URL
-- Apple Podcasts, Spotify, and RSS links
+- Apple Podcasts, Spotify, Overcast, and RSS links
 - Production credit and copyright holder
 - Podcast artwork and social preview image paths
 
-Platform links are centralized there. Episode-specific Apple Podcasts and Spotify links remain
-optional.
+Platform links are centralized there. Episode-specific Apple Podcasts, Spotify, and Overcast links
+remain optional.
+
+The homepage presents all three listening platforms with equal button styling and keeps RSS as a
+smaller subscription link. Episode pages do not fall back to these show URLs: they only show a
+platform button when that episode's Markdown frontmatter provides a direct URL. The same distinction
+is preserved in the generated Markdown pages and `llms.txt`.
 
 ## Brand assets
 
