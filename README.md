@@ -10,14 +10,17 @@ runtime. No package dependencies are delivered to visitors.
 ## Project structure
 
 ```text
-assets/brand/          Brand artwork and icons used by the site
-assets/style.css       Site-wide styles
-scripts/build.mjs      Validates content and generates the site
-vite.config.ts         Vite+ checks and local preview configuration
-site.config.json       Show details, platform links, and artwork paths
-src/content/episodes/  One Markdown file per episode
-templates/episode.md   Starting point for a new episode
-dist/                  Generated site, ignored by Git
+assets/brand/            Brand artwork and icons used by the site
+assets/style.css         Site-wide styles
+scripts/content.mjs      Parses and validates episode content
+scripts/content.test.mjs Focused content validation tests
+scripts/build.mjs        Validates content and generates the site
+scripts/check.mjs        Validates the generated production output
+vite.config.ts           Vite+ checks and local preview configuration
+site.config.json         Show details, platform links, and artwork paths
+src/content/episodes/    One Markdown file per episode
+templates/episode.md     Starting point for a new episode
+dist/                    Generated site, ignored by Git
 ```
 
 Do not edit files in `dist/`. Every build deletes and recreates that directory from the source
@@ -46,6 +49,9 @@ vp run build
 # Run formatting (including Markdown), linting, and type checks
 vp check
 
+# Run focused content parser and schema tests
+vp test
+
 # Build and run all production checks
 vp run check
 
@@ -63,8 +69,8 @@ instead of the generated website and may display `Index of /`.
 
 1. Copy `templates/episode.md` to `src/content/episodes/002-topic-name.md`.
 2. Update the frontmatter.
-3. Write the sections needed for the episode. Summary, Interesting Discoveries, and Sources and
-   Further Reading are recommended.
+3. Write the Summary and any other sections needed for the episode. Interesting Discoveries and
+   Sources and Further Reading are recommended when applicable.
 4. Keep `draft: true` while writing.
 5. Change it to `draft: false` when the episode is ready.
 6. Run `vp run dev` and review the homepage and episode page.
@@ -107,6 +113,9 @@ Leave an episode platform URL blank or omit it until that episode is available t
 only render buttons for direct links supplied in frontmatter; show-level links remain centralized in
 `site.config.json` for the homepage.
 
+Frontmatter uses standard YAML. Duplicate keys, unknown fields, invalid field types, and unverified
+placeholder values fail validation. Keep episode metadata and prose in the same Markdown file.
+
 ### Episode sections
 
 Use these exact level-two Markdown headings for the corresponding editorial sections:
@@ -119,10 +128,12 @@ Use these exact level-two Markdown headings for the corresponding editorial sect
 ## Sources and Further Reading
 ```
 
-Each editorial section is optional, and empty sections are not rendered. When Interesting
-Discoveries is present, use three to five Markdown list items. When Sources and Further Reading is
-present, include at least one Markdown link using an `https` URL. A short annotation can follow each
-source link on the next line.
+Summary is required and must be non-empty for a published episode. The other sections are optional,
+and empty optional sections are not rendered. Unknown or duplicate level-two headings fail
+validation. When Interesting Discoveries is present, use three to five Markdown list items. When
+Sources and Further Reading is present, include at least one Markdown link using an `https` URL. A
+short annotation can follow each source link on the next line. Raw HTML is displayed as text rather
+than executed. Markdown links and images must use HTTPS or a local path.
 
 The transcript is optional. Add it only when one is available:
 
@@ -143,10 +154,11 @@ Draft episodes are parsed and checked for valid frontmatter, unique episode numb
 and valid dates. They are excluded from the homepage, archive, episode routes, sitemap, and
 deployment artifact.
 
-Published episodes receive additional checks for three to five discoveries when that section is
-present and at least one source link when the sources section is present. Dates must be real
-calendar dates in `YYYY-MM-DD` format, and podcast links must use HTTPS. A failed check stops the
-build and prints the filename and problem.
+Published episodes require a Summary and receive additional checks for three to five discoveries
+when that section is present and at least one source link when the sources section is present. Dates
+must be real calendar dates in `YYYY-MM-DD` format, duration fields must be supplied as a valid
+pair, and podcast links must use HTTPS. A failed check stops the build and prints the filename and
+problem.
 
 ## Site settings
 
@@ -181,15 +193,17 @@ Replace an image in place to update it without code changes. Preserve its filena
 aspect ratio, and intended background. Keep only files referenced by the build or site
 configuration.
 
-The development dependencies are `marked`, which converts episode Markdown into HTML;
-`html-validate`, which checks generated pages before deployment; and Vite+, which provides the
-development toolchain and preview server. None are shipped to visitors.
+The development dependencies are `marked`, which converts episode Markdown into HTML; `yaml`, which
+parses episode frontmatter; `html-validate`, which checks generated pages before deployment; and
+Vite+, which provides the development toolchain, test runner, and preview server. None are shipped
+to visitors.
 
 ## Build output
 
 `vp run build` performs the following work:
 
-1. Reads and validates every Markdown file in `src/content/episodes/`.
+1. Reads every Markdown file in `src/content/episodes/` and validates its YAML frontmatter and
+   editorial sections.
 2. Excludes drafts and sorts published episodes newest first.
 3. Generates the homepage and permanent episode pages.
 4. Generates metadata, PodcastSeries and PodcastEpisode structured data, `robots.txt`,
