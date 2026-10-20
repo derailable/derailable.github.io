@@ -28,15 +28,26 @@ But Maryland had already begun building two Washington Monuments of its own. In 
 
 ## Sources and Further Reading
 
-- [The Washington Monument: Tribute in Stone — National Park Service](https://www.nps.gov/articles/the-washington-monument-tribute-in-stone-teaching-with-historic-places.htm)
-  The abandoned construction project, political conflicts, Pope's stone, and Civil War cattle grounds.
-- [Washington Monument Construction Timeline — National Park Service](https://www.nps.gov/wamo/learn/historyculture/monumentconstruction.htm)
-  Key dates for the D.C. monument, including the long pause and the 1884 completion.
-- [The Point of the Matter — National Park Service](https://www.nps.gov/articles/000/wamocap.htm)
-  How the aluminum tip was made, what it cost, and why it appeared at Tiffany's before installation.
-- [Statue of Washington — Maryland State Archives](https://msa.maryland.gov/msa/mdstatehouse/html/stairwellrm-washington-monument.html)
-  Baltimore's monument, its early construction, and the meaning of Washington's resignation pose.
-- [Washington Monument State Park History — Maryland Department of Natural Resources](https://dnr.maryland.gov/publiclands/Pages/western/Washington/History-Washington.aspx)
-  Boonsboro's 1827 community construction, later damage, and restoration.
-- [The Little-Known Story of the First Completed Washington Monument — Smithsonian Magazine](https://www.smithsonianmag.com/history/the-little-known-story-of-the-first-washington-monument-180981268/)
-  The distinction between the first monument begun and the first completed, with contemporary accounts from Boonsboro.
+- [The Washington Monument: Tribute in Stone — National Park Service](https://www.nps.gov/articles/the-washington-monument-tribute-in-stone-teaching-with-historic-places.htm)  
+  The monument's original design, political conflicts, stolen Pope's stone, and Civil War cattle grounds.
+
+- [Washington Monument Construction Timeline — National Park Service](https://www.nps.gov/wamo/learn/historyculture/monumentconstruction.htm)  
+  Key dates for the D.C. monument, including its interrupted construction and completion in 1884.
+
+- [The Point of the Matter — National Park Service](https://www.nps.gov/articles/000/wamocap.htm)  
+  The unusual history of the aluminum tip, its manufacture, cost, and appearance at Tiffany's.
+
+- [Statue of Washington — Maryland State Archives](https://msa.maryland.gov/msa/mdstatehouse/html/stairwellrm-washington-monument.html)  
+  Baltimore's Washington Monument and the meaning of its statue depicting Washington resigning his military commission.
+
+- [Washington Monument State Park History — Maryland Department of Natural Resources](https://dnr.maryland.gov/publiclands/Pages/western/Washington/History-Washington.aspx)  
+  Boonsboro's community-built monument, its Civil War history, and subsequent restorations.
+
+- [The Little-Known Story of the First Completed Washington Monument — Smithsonian Magazine](https://www.smithsonianmag.com/history/the-little-known-story-of-the-first-washington-monument-180981268/)  
+  Historical research explaining how Boonsboro completed its monument before Baltimore, including contemporary newspaper accounts.
+
+- [Washington Monument National Register Record — Maryland Historical Trust](https://apps.mht.maryland.gov/nr/NRDetail.aspx?NRID=107)  
+  Official historic preservation documentation covering the Boonsboro monument's construction, architectural features, and rebuilding in 1882 and 1936.
+
+- [Civic Pride: Maintaining the Washington Monument — Boonsboro Historical Society](https://boonsborohistoricalsociety.org/boonsboro-reflections-civic-pride-maintaining-the-washington-monument/)  
+  Local preservation history, documented deterioration and vandalism, and the unverified folklore about an angry father supposedly damaging the monument with dynamite.
