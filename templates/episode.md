@@ -1,14 +1,15 @@
 ---
 # Derailable episode template.
-# Replace the sample metadata before publishing. Keep draft: true until ready.
+# Fill in the required metadata before adding this file to the episode directory.
+# Keep draft: true until ready to publish.
 # Required: title, episode, published, description, and draft.
-title: "Episode title"
-episode: 2
-published: 2026-11-01
-# Optional: use the final published audio duration in both formats.
-duration: "24 min 10 sec"
-durationIso: "PT24M10S"
-description: "One or two compelling sentences for episode cards and search results."
+title: ""
+episode: 0
+published: ""
+description: ""
+# Optional: when known, provide the final audio duration in both formats.
+duration: ""
+durationIso: ""
 # Optional direct links to this episode, not the show's general pages.
 # Leave blank when an episode is not yet available on a platform.
 appleUrl: ""
@@ -18,31 +19,21 @@ draft: true
 ---
 
 <!--
-Required headings for website processing. Keep their spelling, capitalization,
-level (##), and order exactly as shown. Do not rename or remove them.
+Summary is required for published episodes. The other headings are optional.
+Keep the spelling, capitalization, level (##), and order of headings you use.
 Content should describe the published recording, not research that was cut.
-Format every source as "Source title - Publisher" with an HTTPS link, followed
-by a two-space-indented annotation on the next line. Use an ordinary hyphen.
+Write a standalone Summary of roughly 125 to 200 words. Lead with the most
+interesting discovery, explain the story's stakes, and avoid repeating the
+short description. Do not manufacture dialogue or reactions.
+When used, Interesting Discoveries needs three to five specific, supported
+list items. Format sources as "Source title - Publisher" with a verified HTTPS
+link and, optionally, a two-space-indented annotation on the following line.
+Use an ordinary hyphen. To add a transcript, append a level-two heading exactly
+named "## Transcript" and an edited, speaker-labeled transcript.
 -->
 
 ## Summary
 
-Write a standalone overview of the episode (roughly 125–200 words). Lead with its most interesting
-discovery, explain the story's stakes, and avoid simply repeating the short description. Do not
-manufacture dialogue or reactions.
-
 ## Interesting Discoveries
 
-- Add one specific, well-supported surprise from the episode.
-- Add another memorable historical fact or connection.
-- Add a third discovery. Usually three to five is enough.
-
 ## Sources and Further Reading
-
-- [Source title - Publisher](https://example.com/) Explain briefly what this source documents and
-  why it is worth reading.
-
-<!--
-Optional: append a level-two heading exactly named "## Transcript" and an edited,
-speaker-labeled transcript after the episode is published.
--->
