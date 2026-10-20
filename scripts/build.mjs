@@ -2,29 +2,12 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { marked } from "marked";
+import { isHttpsUrl, parseEpisode, validateEpisode } from "./content.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "dist");
 const config = JSON.parse(await readFile(path.join(root, "site.config.json"), "utf8"));
 const episodeDirectory = path.join(root, "src", "content", "episodes");
-const required = ["title", "episode", "published", "description", "draft"];
-
-function isHttpsUrl(value) {
-  try {
-    return typeof value === "string" && new URL(value).protocol === "https:";
-  } catch {
-    return false;
-  }
-}
-
-function isValidDate(value) {
-  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const [year, month, day] = value.split("-").map(Number);
-  const date = new Date(Date.UTC(year, month - 1, day));
-  return (
-    date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day
-  );
-}
 
 const configErrors = [];
 for (const field of ["name", "tagline", "description", "producer", "copyrightHolder"]) {
@@ -43,8 +26,6 @@ if (configErrors.length)
 
 const customDomain = new URL(config.siteUrl).hostname;
 
-marked.use({ gfm: true, breaks: false });
-
 const escapeHtml = (value = "") =>
   String(value)
     .replaceAll("&", "&amp;")
@@ -53,7 +34,20 @@ const escapeHtml = (value = "") =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 
+marked.use({
+  gfm: true,
+  breaks: false,
+  renderer: { html: ({ text }) => escapeHtml(text) },
+});
+
 const safeJson = (value) => JSON.stringify(value).replaceAll("<", "\\u003c");
+const escapeXml = (value) =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 const absoluteUrl = (pathname) => new URL(pathname, config.siteUrl).href;
 const episodeUrl = (episode) => `/episodes/${episode.slug}/`;
 const episodeMarkdownUrl = (episode) => `${episodeUrl(episode)}index.md`;
@@ -77,63 +71,6 @@ function displayDate(value, short = false) {
   }).format(dateValue(value));
 }
 
-function parseScalar(raw) {
-  const value = raw.trim();
-  if (value.startsWith('"') && value.endsWith('"')) return JSON.parse(value);
-  if (value.startsWith("'") && value.endsWith("'")) return value.slice(1, -1).replaceAll("''", "'");
-  if (value === "true") return true;
-  if (value === "false") return false;
-  if (/^-?\d+$/.test(value)) return Number(value);
-  return value;
-}
-
-function parseEpisode(source, file) {
-  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) throw new Error(`${file}: missing frontmatter enclosed by --- lines`);
-
-  const data = {};
-  const frontmatterLines = match[1].split(/\r?\n/);
-  for (let index = 0; index < frontmatterLines.length; index += 1) {
-    const line = frontmatterLines[index];
-    if (!line.trim() || line.trimStart().startsWith("#")) continue;
-    const field = line.match(/^([A-Za-z][A-Za-z0-9]*):\s*(.*)$/);
-    if (!field) throw new Error(`${file}: unsupported frontmatter line: ${line}`);
-
-    let rawValue = field[2];
-    if (!rawValue) {
-      const continuation = [];
-      while (frontmatterLines[index + 1]?.match(/^\s+\S/)) {
-        continuation.push(frontmatterLines[index + 1].trim());
-        index += 1;
-      }
-      rawValue = continuation.join(" ");
-    }
-    data[field[1]] = parseScalar(rawValue);
-  }
-
-  const sections = [];
-  let current;
-  for (const line of match[2].split(/\r?\n/)) {
-    const heading = line.match(/^##\s+(.+?)\s*$/);
-    if (heading) {
-      current = { heading: heading[1], content: [] };
-      sections.push(current);
-    } else if (current) {
-      current.content.push(line);
-    }
-  }
-
-  return {
-    ...data,
-    file,
-    slug: data.slug || path.basename(file, path.extname(file)).replace(/^\d+-/, ""),
-    sections: sections.map((section) => ({
-      ...section,
-      content: section.content.join("\n").trim(),
-    })),
-  };
-}
-
 const files = (await readdir(episodeDirectory)).filter((file) => /\.md(?:own)?$/.test(file)).sort();
 const allEpisodes = [];
 const errors = [];
@@ -141,38 +78,7 @@ const errors = [];
 for (const file of files) {
   try {
     const episode = parseEpisode(await readFile(path.join(episodeDirectory, file), "utf8"), file);
-    const missing = required.filter(
-      (field) => episode[field] === undefined || episode[field] === null || episode[field] === "",
-    );
-    if (missing.length) errors.push(`${file}: missing required frontmatter: ${missing.join(", ")}`);
-    if (!Number.isInteger(episode.episode) || episode.episode < 1)
-      errors.push(`${file}: episode must be a positive integer`);
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(episode.slug))
-      errors.push(`${file}: slug must use lowercase words separated by hyphens`);
-    if (!isValidDate(episode.published))
-      errors.push(`${file}: published must be a valid date in YYYY-MM-DD format`);
-    if (typeof episode.draft !== "boolean") errors.push(`${file}: draft must be true or false`);
-    if (typeof episode.title !== "string" || !episode.title.trim())
-      errors.push(`${file}: title must be non-empty text`);
-    if (typeof episode.description !== "string" || !episode.description.trim())
-      errors.push(`${file}: description must be non-empty text`);
-    for (const field of ["appleUrl", "spotifyUrl", "overcastUrl"]) {
-      if (episode[field] && !isHttpsUrl(episode[field]))
-        errors.push(`${file}: ${field} must be an https URL`);
-    }
-
-    if (!episode.draft) {
-      const byName = new Map(
-        episode.sections.map((section) => [section.heading.toLowerCase(), section]),
-      );
-      const discoveries = byName.get("interesting discoveries");
-      const sources = byName.get("sources and further reading");
-      const discoveryCount = discoveries?.content.match(/^\s*(?:[-*+] |\d+[.)] )/gm)?.length || 0;
-      if (discoveries?.content && (discoveryCount < 3 || discoveryCount > 5))
-        errors.push(`${file}: include three to five discovery list items`);
-      if (sources?.content && !/\[[^\]]+\]\(https:\/\/[^)]+\)/.test(sources.content))
-        errors.push(`${file}: sources need at least one Markdown link with an https URL`);
-    }
+    errors.push(...validateEpisode(episode));
     allEpisodes.push(episode);
   } catch (error) {
     errors.push(error.message);
@@ -344,7 +250,7 @@ function renderHome() {
       "@type": "PodcastSeries",
       name: config.name,
       description: config.description,
-      url: config.siteUrl,
+      url: absoluteUrl("/"),
       webFeed: config.rssUrl,
       image: absoluteUrl(config.podcastArtwork),
       author: [
@@ -403,7 +309,7 @@ function renderEpisode(episode) {
       ...(episode.durationIso ? { duration: episode.durationIso } : {}),
       url: absoluteUrl(episodeUrl(episode)),
       image: absoluteUrl(config.podcastArtwork),
-      partOfSeries: { "@type": "PodcastSeries", name: config.name, url: config.siteUrl },
+      partOfSeries: { "@type": "PodcastSeries", name: config.name, url: absoluteUrl("/") },
       author: [
         { "@type": "Person", name: "Caleb" },
         { "@type": "Person", name: "Hazel" },
@@ -524,10 +430,9 @@ for (const episode of episodes) {
 }
 
 const sitemapEntries = [
-  `  <url><loc>${absoluteUrl("/")}</loc></url>`,
+  `  <url><loc>${escapeXml(absoluteUrl("/"))}</loc></url>`,
   ...episodes.map(
-    (episode) =>
-      `  <url><loc>${absoluteUrl(episodeUrl(episode))}</loc><lastmod>${episode.published}</lastmod></url>`,
+    (episode) => `  <url><loc>${escapeXml(absoluteUrl(episodeUrl(episode)))}</loc></url>`,
   ),
 ];
 await writeFile(
