@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+<title id="title">Derailable</title>
+<rect width="128" height="128" rx="20" fill="#0D1928"/>
+<!-- Bold simplified D: intentionally reduced detail for tiny browser tabs -->
+<path fill="#BD822C" fill-rule="evenodd" d="M27 17 H58 C89 17 108 36 108 64 C108 92 89 111 58 111 H27 Z M49 36 V92 H58 C75 92 87 79 87 64 C87 49 75 36 58 36 Z"/>
+<path fill="#F5C568" fill-rule="evenodd" d="M30 20 H58 C86 20 105 38 105 64 C105 90 86 108 58 108 H30 Z M49 36 V92 H58 C75 92 87 79 87 64 C87 49 75 36 58 36 Z"/>
+<path d="M39 24 V104" stroke="#A86E23" stroke-width="3" opacity=".9"/>
+<g stroke="#A86E23" stroke-width="3" stroke-linecap="round" opacity=".85"><path d="M27 40 H47 M27 63 H47 M27 86 H47"/></g>
+</svg>
