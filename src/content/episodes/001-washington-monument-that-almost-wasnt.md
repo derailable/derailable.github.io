@@ -30,19 +30,19 @@ But Maryland had already begun two Washington Monuments of its own. In Baltimore
 
 ## Sources and Further Reading
 
-- [The Washington Monument: Tribute in Stone — National Park Service](https://www.nps.gov/articles/the-washington-monument-tribute-in-stone-teaching-with-historic-places.htm)  
+- [The Washington Monument: Tribute in Stone - National Park Service](https://www.nps.gov/articles/the-washington-monument-tribute-in-stone-teaching-with-historic-places.htm)
   The original design, stolen Pope's stone, political disputes, and Civil War cattle grounds.
-- [Washington Monument Construction Timeline — National Park Service](https://www.nps.gov/wamo/learn/historyculture/monumentconstruction.htm)  
+- [Washington Monument Construction Timeline - National Park Service](https://www.nps.gov/wamo/learn/historyculture/monumentconstruction.htm)
   Key construction dates, the long interruption, and the monument's completion in 1884.
-- [The Point of the Matter — National Park Service](https://www.nps.gov/articles/000/wamocap.htm)  
+- [The Point of the Matter - National Park Service](https://www.nps.gov/articles/000/wamocap.htm)
   The aluminum tip, its unusual material, and its journey to the monument.
-- [Topping Off the Tip — National Archives](https://www.archives.gov/publications/prologue/2014/summer/aluminum-tip-monument)  
+- [Topping Off the Tip - National Archives](https://www.archives.gov/publications/prologue/2014/summer/aluminum-tip-monument)
   The Tiffany's display and surviving telegrams about the tip's delayed delivery.
-- [Statue of Washington — Maryland State Archives](https://msa.maryland.gov/msa/mdstatehouse/html/stairwellrm-washington-monument.html)  
+- [Statue of Washington - Maryland State Archives](https://msa.maryland.gov/msa/mdstatehouse/html/stairwellrm-washington-monument.html)
   Baltimore's 1815 cornerstone, 1829 completion, and the meaning of Washington's resignation pose.
-- [Washington Monument State Park History — Maryland Department of Natural Resources](https://dnr.maryland.gov/publiclands/Pages/western/Washington/History-Washington.aspx)  
+- [Washington Monument State Park History - Maryland Department of Natural Resources](https://dnr.maryland.gov/publiclands/Pages/western/Washington/History-Washington.aspx)
   Boonsboro's construction, Civil War history, deterioration, and restoration.
-- [The Little-Known Story of the First Completed Washington Monument in the U.S. — Smithsonian Magazine](https://www.smithsonianmag.com/history/the-little-known-story-of-the-first-washington-monument-180981268/)  
+- [The Little-Known Story of the First Completed Washington Monument in the U.S. - Smithsonian Magazine](https://www.smithsonianmag.com/history/the-little-known-story-of-the-first-washington-monument-180981268/)
   Boonsboro's claim to being first completed, its nearly forgotten 1927 centennial, and its rebuilding.
-- [Civic Pride: Maintaining the Washington Monument — Boonsboro Historical Society](https://boonsborohistoricalsociety.org/boonsboro-reflections-civic-pride-maintaining-the-washington-monument/)  
+- [Civic Pride: Maintaining the Washington Monument - Boonsboro Historical Society](https://boonsborohistoricalsociety.org/boonsboro-reflections-civic-pride-maintaining-the-washington-monument/)
   Local preservation history and the unverified dynamite legend.
