@@ -165,10 +165,11 @@ Use these exact level-two Markdown headings for the corresponding editorial sect
 
 Summary is required and must be non-empty for a published episode. The other sections are optional,
 and empty optional sections are not rendered. Unknown or duplicate level-two headings fail
-validation. When Interesting Discoveries is present, use three to five Markdown list items. When
-Sources and Further Reading is present, include at least one Markdown link using an `https` URL. A
-short annotation can follow each source link on the next line. Raw HTML is displayed as text rather
-than executed. Markdown links and images must use HTTPS or a local path.
+validation. After the frontmatter, only whitespace and HTML comments may appear before the first
+level-two section heading. When Interesting Discoveries is present, use three to five Markdown list
+items. When Sources and Further Reading is present, include at least one Markdown link using an
+`https` URL. A short annotation can follow each source link on the next line. Raw HTML is displayed
+as text rather than executed. Markdown links and images must use HTTPS or a local path.
 
 The transcript is optional. Add it only when one is available:
 
