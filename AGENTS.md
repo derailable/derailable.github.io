@@ -161,10 +161,11 @@ sections use these exact level-two headings:
 - `Transcript`, optional
 
 Unknown and duplicate level-two section headings fail validation. Empty optional sections are not
-rendered. When present, Interesting Discoveries should contain three to five list items. Sources and
-Further Reading must contain at least one descriptive HTTPS link. A short two-space-indented
-annotation may follow a source link. Raw HTML in episode Markdown is escaped rather than executed.
-Markdown links and images must use HTTPS or a local path.
+rendered. After the frontmatter, only whitespace and HTML comments may appear before the first
+level-two section heading. When present, Interesting Discoveries should contain three to five list
+items. Sources and Further Reading must contain at least one descriptive HTTPS link. A short
+two-space-indented annotation may follow a source link. Raw HTML in episode Markdown is escaped
+rather than executed. Markdown links and images must use HTTPS or a local path.
 
 ### Creating an episode
 
