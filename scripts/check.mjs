@@ -56,6 +56,7 @@ const htmlFiles = files.filter((filename) => filename.endsWith(".html"));
 for (const filename of htmlFiles) {
   const html = await readFile(filename, "utf8");
   const relative = path.relative(output, filename);
+  if (/(?:href|src)=""/.test(html)) errors.push(`${relative}: contains an empty href or src`);
   if ((html.match(/<h1\b/g) || []).length !== 1)
     errors.push(`${relative}: expected exactly one h1`);
 
