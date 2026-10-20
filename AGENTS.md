@@ -57,3 +57,17 @@ Use these commands from the repository root:
 There is currently no test suite, so `vp test` is not required. Before handing off changes, run
 `vp run check`; for changes that affect rendered output, also inspect the site through `vp run dev`
 or `vp preview`.
+
+## Podcast listening links
+
+- Keep show-level Apple Podcasts, Spotify, Overcast, and RSS URLs in `site.config.json`. Homepage
+  platform buttons use these shared values, with RSS rendered as a secondary link.
+- Keep direct episode links in episode frontmatter as `appleUrl`, `spotifyUrl`, and `overcastUrl`.
+  These fields are optional and must contain HTTPS URLs when present.
+- Episode pages must render only the direct platform links supplied for that episode. Do not invent
+  missing URLs or fall back to show-level URLs on an episode page.
+- Update `templates/episode.md` whenever the episode frontmatter schema changes. Use blank
+  placeholders for optional links rather than real episode URLs.
+- Preserve the shared `listenLinks` renderer and consistent platform-button styling. After changing
+  link behavior, confirm generated HTML and Markdown contain the intended URLs and no empty `href`
+  attributes.
