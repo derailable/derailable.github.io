@@ -88,6 +88,21 @@ describe("episode content", () => {
     expect(errors).toMatch(/unsupported section heading: Notes/);
   });
 
+  it("rejects meaningful content before the first section heading", () => {
+    expect(() =>
+      parseEpisode(
+        source(validFrontmatter, `This paragraph would otherwise disappear.\n\n${validBody}`),
+        "preamble.md",
+      ),
+    ).toThrow(/content before the first level-two section heading is not supported/);
+
+    const episode = parseEpisode(
+      source(validFrontmatter, `<!-- An editorial note. -->\n\n${validBody}`),
+      "comment.md",
+    );
+    expect(validateEpisode(episode)).toEqual([]);
+  });
+
   it("keeps the checked-in template invalid until required metadata is filled", async () => {
     const templateUrl = new URL("../templates/episode.md", import.meta.url);
     const episode = parseEpisode(await readFile(fileURLToPath(templateUrl), "utf8"), "template.md");
