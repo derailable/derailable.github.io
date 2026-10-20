@@ -24,10 +24,9 @@
 
 ## About the podcast
 
-**Derailable** is a history podcast hosted by Caleb and his daughter Hazel. Hazel chooses something
-from history she wants to understand, Caleb researches it, and then he tells her the story while
-they record. Hazel hears the details for the first time, so her questions, reactions, and
-discoveries are genuine and unscripted.
+**Derailable** is a history podcast hosted by Caleb and his daughter Hazel. Hazel picks something
+from history she is curious about. Caleb does the research and tells her one fascinating true story
+for the first time. Her questions, reactions, and discoveries are genuine and unscripted.
 
 The show explores the strange, surprising, forgotten, and sometimes unbelievable turns hidden in
 real history. It is made for curious adults and children, with thoughtful storytelling, reliable
