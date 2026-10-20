@@ -20,6 +20,8 @@ draft: true
 Required headings for website processing. Keep their spelling, capitalization,
 level (##), and order exactly as shown. Do not rename or remove them.
 Content should describe the published recording, not research that was cut.
+Format every source as "Source title - Publisher" with an HTTPS link, followed
+by a two-space-indented annotation on the next line. Use an ordinary hyphen.
 -->
 
 ## Summary
@@ -36,7 +38,7 @@ repeating the short description. Do not manufacture dialogue or reactions.
 
 ## Sources and Further Reading
 
-- [Source title](https://example.com/)
+- [Source title - Publisher](https://example.com/)
   Explain briefly what this source documents and why it is worth reading.
 
 <!--
