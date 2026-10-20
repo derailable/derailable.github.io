@@ -94,6 +94,7 @@ Sources of truth:
 - `src/content/episodes/` contains episode Markdown source files, including drafts.
 - `templates/episode.md` is the starting point for a new episode.
 - `assets/` contains the source stylesheet and brand artwork.
+- `scripts/content.mjs` parses YAML frontmatter and enforces the episode content schema.
 - `scripts/build.mjs` validates content and regenerates the complete site.
 - `scripts/check.mjs` validates generated files, local links, metadata, and other output invariants.
 - `dist/` is generated and ignored by Git. Never edit it directly or treat it as source.
@@ -147,16 +148,23 @@ Optional frontmatter fields:
 Do not add or rename fields without updating content parsing, validation, rendering, generated
 Markdown, documentation, and `templates/episode.md` as applicable.
 
-Supported editorial sections use these exact level-two headings:
+Frontmatter is parsed as YAML with duplicate keys and unknown fields rejected. Keep an episode's
+metadata and prose together in its Markdown file. Do not split them into parallel JSON or YAML
+files.
+
+Published episodes require a non-empty `Summary`. Other editorial sections are optional. Supported
+sections use these exact level-two headings:
 
 - `Summary`
 - `Interesting Discoveries`
 - `Sources and Further Reading`
 - `Transcript`, optional
 
-Empty optional sections are not rendered. When present, Interesting Discoveries should contain three
-to five list items. Sources and Further Reading must contain at least one descriptive HTTPS link. A
-short two-space-indented annotation may follow a source link.
+Unknown and duplicate level-two section headings fail validation. Empty optional sections are not
+rendered. When present, Interesting Discoveries should contain three to five list items. Sources and
+Further Reading must contain at least one descriptive HTTPS link. A short two-space-indented
+annotation may follow a source link. Raw HTML in episode Markdown is escaped rather than executed.
+Markdown links and images must use HTTPS or a local path.
 
 ### Creating an episode
 
@@ -231,16 +239,16 @@ Run commands from the repository root:
 - `vp install` installs dependencies with the Vite+-managed package manager.
 - `vp fmt` formats all supported files, including Markdown, YAML frontmatter, and fenced code.
 - `vp check` runs Oxfmt, Oxlint, and configured type checks only.
+- `vp test` runs the focused content parser and validation tests.
 - `vp run build` runs `scripts/build.mjs` and recreates `dist/`. Do not use bare `vp build`, which
   invokes Vite's application bundler.
-- `vp run check` is the required full validation. It runs static checks, rebuilds the site,
-  validates generated HTML, and runs `scripts/check.mjs`.
+- `vp run check` is the required full validation. It runs static checks, rebuilds the site, runs
+  tests, validates generated HTML, and runs `scripts/check.mjs`.
 - `vp run dev` builds once and serves `dist/` at `http://127.0.0.1:3001`. It does not watch or
   live-reload. Restart it after source changes.
 - `vp preview` serves the existing `dist/` without rebuilding.
 
-Do not use bare `vp dev`, which would treat the repository as a Vite application. There is currently
-no test suite, so `vp test` from the generic Vite+ checklist is not required.
+Do not use bare `vp dev`, which would treat the repository as a Vite application.
 
 ## Working conventions for agents
 
