@@ -17,9 +17,9 @@ draft: true
 ---
 
 <!--
-Suggested structure for published show notes. Keep them concise and fact-checked.
-Remove unused sections. Do not add a transcript unless you have checked it
-against the published recording, including Hazel's unscripted contributions.
+Required headings for website processing. Keep their spelling, capitalization,
+level (##), and order exactly as shown. Do not rename or remove them.
+Content should describe the published recording, not research that was cut.
 -->
 
 ## Summary
@@ -40,6 +40,6 @@ repeating the short description. Do not manufacture dialogue or reactions.
   Explain briefly what this source documents and why it is worth reading.
 
 <!--
-Optional: add a level-two heading named "Transcript" and an edited,
-speaker-labeled transcript once the recording is published and checked.
+Optional: append a level-two heading exactly named "## Transcript" and an edited,
+speaker-labeled transcript after the episode is published.
 -->
