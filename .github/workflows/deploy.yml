@@ -27,7 +27,7 @@ jobs:
           cache: true
           run-install: false
       - name: Install dependencies
-        run: vp install --frozen-lockfile
+        run: vp install --frozen-lockfile --ignore-scripts
       - name: Build and validate
         run: vp run check
       - name: Configure Pages
