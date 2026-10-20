@@ -267,9 +267,9 @@ refreshes the human-readable and LLM-readable versions together.
 The deployment workflow is `.github/workflows/deploy.yml`.
 
 - A push to `main`, or a manual workflow dispatch, starts deployment.
-- GitHub Actions installs dependencies with `npm ci`.
-- The action runs `npm run check` so the repository-local Vite+ binary is available, and uploads
-  `dist/` only after validation succeeds.
+- GitHub Actions uses the official Vite+ setup action to select the managed Node.js and npm
+  versions, then installs dependencies with `vp install --frozen-lockfile`.
+- The action runs `vp run check` and uploads `dist/` only after validation succeeds.
 - GitHub Pages publishes the uploaded artifact.
 - The generated `CNAME` uses the hostname from `siteUrl` in `site.config.json`.
 
