@@ -434,6 +434,7 @@ Every episode, Hazel chooses a historical topic she is curious about. Caleb rese
 
 - [Apple Podcasts](${config.appleUrl})
 - [Spotify](${config.spotifyUrl})
+- [Overcast](${config.overcastUrl})
 - [Podcast RSS](${config.rssUrl}): The authoritative podcast feed.
 
 ## Episodes
@@ -443,8 +444,11 @@ ${episodeList}
 }
 
 function renderEpisodeMarkdown(episode) {
-  const appleUrl = episode.appleUrl || config.appleUrl;
-  const spotifyUrl = episode.spotifyUrl || config.spotifyUrl;
+  const platformLinks = listeningPlatforms
+    .flatMap((platform) =>
+      episode[platform.field] ? [`- [${platform.label}](${episode[platform.field]})`] : [],
+    )
+    .join("\n");
   const duration = episode.duration ? `\n- Duration: ${episode.duration}` : "";
   const sections = episode.sections
     .filter((section) => section.content)
@@ -456,8 +460,7 @@ function renderEpisodeMarkdown(episode) {
 > ${episode.description}
 
 - Published: ${displayDate(String(episode.published))}${duration}
-- [Apple Podcasts](${appleUrl})
-- [Spotify](${spotifyUrl})
+${platformLinks}
 - [Podcast RSS](${config.rssUrl})
 
 ${sections}
@@ -485,6 +488,7 @@ ${episodeList}
 
 - [Apple Podcasts](${config.appleUrl})
 - [Spotify](${config.spotifyUrl})
+- [Overcast](${config.overcastUrl})
 `;
 }
 
