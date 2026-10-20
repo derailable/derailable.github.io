@@ -1,32 +1,45 @@
 ---
+# Derailable episode template.
+# Replace the sample metadata before publishing. Keep draft: true until ready.
 # Required: title, episode, published, description, and draft.
 title: "Episode title"
 episode: 2
 published: 2026-11-01
+# Optional: use the final published audio duration in both formats.
 duration: "24 min 10 sec"
 durationIso: "PT24M10S"
-description: "A short, compelling description for the homepage and search results."
-# Optional episode-specific links; leave blank to use the show pages.
+description: "One or two compelling sentences for episode cards and search results."
+# Optional direct links to this episode, not the show's general pages.
+# Leave blank to use the show's Apple Podcasts and Spotify links.
 appleUrl: ""
 spotifyUrl: ""
 draft: true
 ---
 
-<!-- The editorial sections below are recommended but optional. Remove any section you do not need. -->
+<!--
+Suggested structure for published show notes. Keep them concise and fact-checked.
+Remove unused sections. Do not add a transcript unless you have checked it
+against the published recording, including Hazel's unscripted contributions.
+-->
 
 ## Summary
 
-Write the main editorial summary here. Aim for roughly 150 to 250 words.
+Write a standalone overview of the episode (roughly 125–200 words). Lead with
+its most interesting discovery, explain the story's stakes, and avoid simply
+repeating the short description. Do not manufacture dialogue or reactions.
 
 ## Interesting Discoveries
 
-- Add a memorable, independently verified discovery.
-- Add another surprising detail or connection.
-- Add a third discovery; use no more than five total.
+- Add one specific, well-supported surprise from the episode.
+- Add another memorable historical fact or connection.
+- Add a third discovery. Usually three to five is enough.
 
 ## Sources and Further Reading
 
-- [Source title](https://example.com/)  
-  Briefly explain why this source is useful.
+- [Source title](https://example.com/)
+  Explain briefly what this source documents and why it is worth reading.
 
-<!-- Optional: append a level-two heading named "Transcript" and the speaker-formatted transcript when one is available. -->
+<!--
+Optional: add a level-two heading named "Transcript" and an edited,
+speaker-labeled transcript once the recording is published and checked.
+-->
