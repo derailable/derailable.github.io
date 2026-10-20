@@ -31,7 +31,7 @@ for (const field of ["name", "tagline", "description", "producer", "copyrightHol
   if (typeof config[field] !== "string" || !config[field].trim())
     configErrors.push(`${field} must be non-empty text`);
 }
-for (const field of ["siteUrl", "appleUrl", "spotifyUrl", "rssUrl"]) {
+for (const field of ["siteUrl", "appleUrl", "spotifyUrl", "overcastUrl", "rssUrl"]) {
   if (!isHttpsUrl(config[field])) configErrors.push(`${field} must be an https URL`);
 }
 for (const field of ["podcastArtwork", "socialImage"]) {
@@ -92,11 +92,23 @@ function parseEpisode(source, file) {
   if (!match) throw new Error(`${file}: missing frontmatter enclosed by --- lines`);
 
   const data = {};
-  for (const line of match[1].split(/\r?\n/)) {
+  const frontmatterLines = match[1].split(/\r?\n/);
+  for (let index = 0; index < frontmatterLines.length; index += 1) {
+    const line = frontmatterLines[index];
     if (!line.trim() || line.trimStart().startsWith("#")) continue;
     const field = line.match(/^([A-Za-z][A-Za-z0-9]*):\s*(.*)$/);
     if (!field) throw new Error(`${file}: unsupported frontmatter line: ${line}`);
-    data[field[1]] = parseScalar(field[2]);
+
+    let rawValue = field[2];
+    if (!rawValue) {
+      const continuation = [];
+      while (frontmatterLines[index + 1]?.match(/^\s+\S/)) {
+        continuation.push(frontmatterLines[index + 1].trim());
+        index += 1;
+      }
+      rawValue = continuation.join(" ");
+    }
+    data[field[1]] = parseScalar(rawValue);
   }
 
   const sections = [];
@@ -144,7 +156,7 @@ for (const file of files) {
       errors.push(`${file}: title must be non-empty text`);
     if (typeof episode.description !== "string" || !episode.description.trim())
       errors.push(`${file}: description must be non-empty text`);
-    for (const field of ["appleUrl", "spotifyUrl"]) {
+    for (const field of ["appleUrl", "spotifyUrl", "overcastUrl"]) {
       if (episode[field] && !isHttpsUrl(episode[field]))
         errors.push(`${file}: ${field} must be an https URL`);
     }
@@ -181,15 +193,35 @@ const episodes = allEpisodes
   .filter((episode) => !episode.draft)
   .sort((a, b) => dateValue(String(b.published)) - dateValue(String(a.published)));
 
-function listenLinks(includeRss = false, label = "Listen to Derailable", episode = {}) {
-  const appleUrl = episode.appleUrl || config.appleUrl;
-  const spotifyUrl = episode.spotifyUrl || config.spotifyUrl;
+const platformIcons = {
+  apple: `<svg class="platform-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="12" cy="11" r="1.8" fill="currentColor" stroke="none"/><path d="M10.5 14.5h3l-.55 5h-1.9l-.55-5Z"/><path d="M8.6 13.8a5 5 0 1 1 6.8 0M6.2 16.1a8.2 8.2 0 1 1 11.6 0"/></svg>`,
+  overcast: `<svg class="platform-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M9.2 14.8a4 4 0 1 1 5.6 0M7 17a7 7 0 1 1 10 0"/></svg>`,
+  spotify: `<svg class="platform-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M7.6 9.5c3.4-1 6.8-.7 9.6.8M8.4 12.5c2.7-.8 5.6-.5 8 .7M9.1 15.3c2.2-.5 4.3-.3 6.2.6"/></svg>`,
+};
+const listeningPlatforms = [
+  { field: "appleUrl", icon: "apple", label: "Apple Podcasts" },
+  { field: "spotifyUrl", icon: "spotify", label: "Spotify" },
+  { field: "overcastUrl", icon: "overcast", label: "Overcast" },
+];
+
+function listenLinks({ includeRss = false, label = "Listen to Derailable", episode, id } = {}) {
+  const platformLinks = listeningPlatforms
+    .flatMap((platform) => {
+      const url = episode ? episode[platform.field] : config[platform.field];
+      return url
+        ? [
+            `    <a class="button button-primary" href="${escapeHtml(url)}">${platformIcons[platform.icon]}<span>${platform.label}</span></a>`,
+          ]
+        : [];
+    })
+    .join("\n");
   const rssLink = includeRss
     ? `\n    <a class="text-link" href="${escapeHtml(config.rssUrl)}">Subscribe via RSS <span aria-hidden="true">&rarr;</span></a>`
     : "";
-  return `<nav class="listen-links" aria-label="${escapeHtml(label)}">
-    <a class="button button-primary" href="${escapeHtml(appleUrl)}">Apple Podcasts</a>
-    <a class="button button-primary" href="${escapeHtml(spotifyUrl)}">Spotify</a>${rssLink}
+  if (!platformLinks && !rssLink) return "";
+  const idAttribute = id ? ` id="${escapeHtml(id)}"` : "";
+  return `<nav class="listen-links"${idAttribute} aria-label="${escapeHtml(label)}">
+${platformLinks}${rssLink}
   </nav>`;
 }
 
@@ -237,7 +269,7 @@ ${pathname === "/" ? '    <link rel="preload" as="image" href="/assets/brand/log
           <img src="/assets/brand/logo-mark.png" alt="" width="144" height="144" decoding="async">
           <span>Derailable</span>
         </a>
-        <a class="header-listen" href="${escapeHtml(config.appleUrl)}">Listen now <span aria-hidden="true">&rarr;</span></a>
+        <a class="header-listen" href="/#listen">Listen now <span aria-hidden="true">&rarr;</span></a>
       </div>
     </header>
     <main id="main">${body}</main>
@@ -262,7 +294,7 @@ function renderHome() {
         <time datetime="${escapeHtml(String(latest.published))}">${displayDate(String(latest.published))}</time>
         <p>${escapeHtml(latest.description)}</p>
         <a class="text-link" href="${episodeUrl(latest)}">Explore the episode <span aria-hidden="true">&rarr;</span></a>
-        ${listenLinks(false, "Listen to the latest episode", latest)}
+        ${listenLinks({ label: "Listen to Derailable" })}
       </div>
     </article>
   </section>`
@@ -286,7 +318,7 @@ function renderHome() {
         <p class="kicker">A father-daughter history podcast</p>
         <h1>${escapeHtml(config.tagline)}</h1>
         <p class="hero-intro">Hazel picks something from history she&rsquo;s curious about. Her dad, Caleb, does the research and tells her one fascinating true story for the first time, on mic.</p>
-        ${listenLinks(true, "Listen and subscribe")}
+        ${listenLinks({ includeRss: true, label: "Listen and subscribe", id: "listen" })}
       </div>
     </div>
   </section>
@@ -326,7 +358,7 @@ function renderHome() {
 
 function renderSection(section) {
   const id = sectionId(section.heading);
-  return `<section class="episode-section" aria-labelledby="${id}"><h2 id="${id}">${escapeHtml(section.heading === "Summary" ? "Episode Summary" : section.heading)}</h2>${marked.parse(section.content)}</section>`;
+  return `<section class="episode-section" aria-labelledby="${id}"><h2 id="${id}">${escapeHtml(section.heading === "Summary" ? "Episode Summary" : section.heading)}</h2>${marked.parse(section.content, { async: false })}</section>`;
 }
 
 function renderEpisode(episode) {
@@ -349,7 +381,7 @@ function renderEpisode(episode) {
       <h1>${escapeHtml(episode.title)}</h1>
       <div class="episode-meta"><time datetime="${escapeHtml(String(episode.published))}">${displayDate(String(episode.published))}</time>${episode.duration ? `<span aria-hidden="true">&bull;</span><span>${escapeHtml(episode.duration)}</span>` : ""}</div>
       <p class="episode-deck">${escapeHtml(episode.description)}</p>
-      ${listenLinks(false, "Listen to this episode", episode)}
+      ${listenLinks({ label: "Listen to this episode", episode })}
     </header>
     <div class="article-rule shell" aria-hidden="true"><span></span></div>
     <div class="episode-content shell reading-shell prose">${sections.join("\n")}</div>

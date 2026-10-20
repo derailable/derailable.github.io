@@ -10,9 +10,10 @@ duration: "24 min 10 sec"
 durationIso: "PT24M10S"
 description: "One or two compelling sentences for episode cards and search results."
 # Optional direct links to this episode, not the show's general pages.
-# Leave blank to use the show's Apple Podcasts and Spotify links.
+# Leave blank when an episode is not yet available on a platform.
 appleUrl: ""
 spotifyUrl: ""
+overcastUrl: ""
 draft: true
 ---
 
@@ -26,9 +27,9 @@ by a two-space-indented annotation on the next line. Use an ordinary hyphen.
 
 ## Summary
 
-Write a standalone overview of the episode (roughly 125–200 words). Lead with
-its most interesting discovery, explain the story's stakes, and avoid simply
-repeating the short description. Do not manufacture dialogue or reactions.
+Write a standalone overview of the episode (roughly 125–200 words). Lead with its most interesting
+discovery, explain the story's stakes, and avoid simply repeating the short description. Do not
+manufacture dialogue or reactions.
 
 ## Interesting Discoveries
 
@@ -38,8 +39,8 @@ repeating the short description. Do not manufacture dialogue or reactions.
 
 ## Sources and Further Reading
 
-- [Source title - Publisher](https://example.com/)
-  Explain briefly what this source documents and why it is worth reading.
+- [Source title - Publisher](https://example.com/) Explain briefly what this source documents and
+  why it is worth reading.
 
 <!--
 Optional: append a level-two heading exactly named "## Transcript" and an edited,
