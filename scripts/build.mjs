@@ -122,7 +122,7 @@ function listenLinks({ includeRss = false, label = "Listen to Derailable", episo
     })
     .join("\n");
   const rssLink = includeRss
-    ? `\n    <a class="text-link" href="${escapeHtml(config.rssUrl)}">Subscribe via RSS <span aria-hidden="true">&rarr;</span></a>`
+    ? `\n    <a class="text-link" href="${escapeHtml(config.rssUrl)}">Subscribe via RSS</a>`
     : "";
   if (!platformLinks && !rssLink) return "";
   const idAttribute = id ? ` id="${escapeHtml(id)}"` : "";
@@ -175,7 +175,7 @@ ${pathname === "/" ? '    <link rel="preload" as="image" href="/assets/brand/log
           <img src="/assets/brand/logo-mark.png" alt="" width="144" height="144" decoding="async">
           <span>Derailable</span>
         </a>
-        <a class="header-listen" href="/#listen">Listen now <span aria-hidden="true">&rarr;</span></a>
+        <a class="header-listen" href="/#listen">Listen now</a>
       </div>
     </header>
     <main id="main">${body}</main>
@@ -199,7 +199,7 @@ function renderHome() {
       <div class="latest-copy">
         <time datetime="${escapeHtml(String(latest.published))}">${displayDate(String(latest.published))}</time>
         <p>${escapeHtml(latest.description)}</p>
-        <a class="text-link" href="${episodeUrl(latest)}">Explore the episode <span aria-hidden="true">&rarr;</span></a>
+        <a class="text-link" href="${episodeUrl(latest)}">Explore the episode</a>
         ${listenLinks({ label: "Listen to Derailable" })}
       </div>
     </article>
