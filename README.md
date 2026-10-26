@@ -102,7 +102,8 @@ instead of the generated website and may display `Index of /`.
 
 ## Publish an episode
 
-1. Copy `templates/episode.md` to `src/content/episodes/002-topic-name.md`.
+1. Copy `templates/episode.md` into `src/content/episodes/`, using the next zero-padded episode
+   number in the filename, such as `003-topic-name.md`.
 2. Update the frontmatter.
 3. Write the Summary and any other sections needed for the episode. Interesting Discoveries and
    Sources and Further Reading are recommended when applicable.
@@ -114,7 +115,7 @@ instead of the generated website and may display `Index of /`.
 The filename becomes the permanent URL after its numeric prefix is removed:
 
 ```text
-src/content/episodes/002-topic-name.md
+src/content/episodes/NNN-topic-name.md
 https://derailable.com/episodes/topic-name/
 ```
 
