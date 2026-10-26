@@ -257,6 +257,8 @@ Before changing the project:
 
 - Inspect the relevant files and established conventions.
 - Preserve unrelated user changes, published copy, historical claims, and styling.
+- Keep episode and template prose unwrapped in source, relying on editor soft wrapping instead of
+  manual line breaks.
 - Make the smallest maintainable change that satisfies the request.
 - Reuse shared configuration and renderers rather than duplicating values or markup.
 - Avoid broad refactors or new dependencies without clear justification.
