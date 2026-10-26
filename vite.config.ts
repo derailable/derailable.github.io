@@ -13,6 +13,12 @@ export default defineConfig({
   fmt: {
     embeddedLanguageFormatting: "auto",
     proseWrap: "always",
+    overrides: [
+      {
+        files: ["src/content/episodes/**/*.md", "templates/episode.md"],
+        options: { proseWrap: "never" },
+      },
+    ],
   },
   lint: {
     jsPlugins: [{ name: "vite-plus", specifier: "vite-plus/oxlint-plugin" }],
