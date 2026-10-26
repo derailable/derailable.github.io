@@ -22,14 +22,9 @@ draft: true
 Summary is required for published episodes. The other headings are optional.
 Keep the spelling, capitalization, level (##), and order of headings you use.
 Content should describe the published recording, not research that was cut.
-Write a standalone Summary of roughly 125 to 200 words. Lead with the most
-interesting discovery, explain the story's stakes, and avoid repeating the
-short description. Do not manufacture dialogue or reactions.
-When used, Interesting Discoveries needs three to five specific, supported
-list items. Format sources as "Source title - Publisher" with a verified HTTPS
-link and, optionally, a two-space-indented annotation on the following line.
-Use an ordinary hyphen. To add a transcript, append a level-two heading exactly
-named "## Transcript" and an edited, speaker-labeled transcript.
+Write a standalone Summary of roughly 125 to 200 words. Lead with the most interesting discovery, explain the story's stakes, and avoid repeating the short description. Do not manufacture dialogue or reactions.
+When used, Interesting Discoveries needs three to five specific, supported list items. Format sources as "Source title - Publisher" with a verified HTTPS link and, optionally, a two-space-indented annotation on the following line.
+Use an ordinary hyphen. To add a transcript, append a level-two heading exactly named "## Transcript" and an edited, speaker-labeled transcript.
 -->
 
 ## Summary
